@@ -1,0 +1,1 @@
+The purpose of this exercise is to help familiarize myself with functions; namely if/else, scope (i.e. global vs. local), prompts, and console logging.
