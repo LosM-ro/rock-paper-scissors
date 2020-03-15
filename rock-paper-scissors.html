@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <script>
+      function game() {
+        function computerPlay() {
+          let computerChoice = Array("Rock", "Paper", "Scissors");
+          return computerChoice[
+            Math.floor(Math.random() * computerChoice.length)
+          ];
+        }
+
+        function playRound(playerSelection, computerSelection) {
+          let player = playerSelection.toLowerCase();
+
+          if (player == "rock" && computerSelection == "Paper") {
+            return "You lose, Paper beats Rock!";
+          }
+          if (player == "paper" && computerSelection == "Paper") {
+            return "It's a tie! You both picked Paper!";
+          }
+          if (player == "scissors" && computerSelection == "Paper") {
+            return "You win! Scissors beats Paper!";
+          }
+          if (player == "rock" && computerSelection == "Rock") {
+            return "It's a tie! You both picked Rock!";
+          }
+          if (player == "paper" && computerSelection == "Rock") {
+            return "You win! Paper beats Rock!";
+          }
+          if (player == "scissors" && computerSelection == "Rock") {
+            return "You lose! Rock beats Scissors!";
+          }
+          if (player == "rock" && computerSelection == "Scissors") {
+            return "You win! Rock beats Scissors!";
+          }
+          if (player == "paper" && computerSelection == "Scissors") {
+            return "You lose! Scrissors beats Paper!";
+          }
+          if (player == "scissors" && computerSelection == "Scissors") {
+            return "It's a tie! You both picked Scissors";
+          } else {
+            return "Sorry, you must pick Rock, Paper, or Scissors.";
+          }
+        }
+
+        const playerSelection = "PAPER";
+        const computerSelection = computerPlay();
+
+        console.log(playRound3(playerSelection, computerSelection));
+      }
+
+      alert(game());
+    </script>
+  </body>
+</html>
