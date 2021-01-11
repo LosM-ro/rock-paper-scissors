@@ -1,78 +1,72 @@
-function computerPlay() {
-  let computerChoice = Array("Rock", "Paper", "Scissors");
-  return computerChoice[Math.floor(Math.random() * computerChoice.length)];
+"use strict";
+
+function playGame(round) {
+  let playerSelection = prompt(
+    `Round ${round + 1} of 5: Enter Rock, Paper, or Scissors`
+  );
+
+  let computerChoice = computerPlay();
+
+  playRound(playerSelection, computerChoice);
 }
 
-let playerScore = 0;
-let computerScore = 0;
+function computerPlay() {
+  let computerSelection = Array("rock", "paper", "scissors");
+  return computerSelection[
+    Math.floor(Math.random() * computerSelection.length)
+  ];
+}
+
+function playRound(playerSelection, computerChoice) {
+  let playerChoice = playerSelection.toLowerCase();
+
+  switch (playerChoice + computerChoice) {
+    case "scissorspaper":
+    case "paperrock":
+    case "rockscissors":
+      alert(`You win, ${playerChoice} beats ${computerChoice}!`);
+      app.playerScore++;
+      break;
+    case "rockpaper":
+    case "scissorsrock":
+    case "paperscissors":
+      alert(`Computer wins, ${computerChoice} beats ${playerChoice}!`);
+      app.computerScore++;
+      break;
+    case "paperpaper":
+    case "rockrock":
+    case "scissorsscissors":
+      alert(`It's a tie, you both picked ${playerChoice}.`);
+      break;
+    default:
+      alert("Sorry, you must input Rock, Paper, or Scissors");
+  }
+}
+
+function gameResult() {
+  switch (true) {
+    case app.playerScore > app.computerScore:
+      alert(
+        `You are the winner!! Your score of ${app.playerScore} beats computer score of ${app.computerScore}!`
+      );
+      break;
+    case app.playerScore === app.computerScore:
+      alert("It's a draw, you're both winners... or, losers?");
+      break;
+    default:
+      alert(
+        `Computer wins! Computer score of ${app.computerScore} beats your score of ${app.playerScore} !`
+      );
+  }
+}
+
+let app = {
+  playerScore: 0,
+  computerScore: 0,
+};
 
 for (let i = 0; i < 5; i++) {
-  let round = 1 + i;
-
-  function playGame() {
-    const playerSelection = prompt(
-      `Round ${round} of 5: Enter Rock, Paper, or Scissors`
-    );
-    const computerSelection = computerPlay();
-
-    function playRound(playerSelection, computerSelection) {
-      let player = playerSelection.toLowerCase();
-
-      if (player === "rock" && computerSelection === "Paper") {
-        lose("Rock", "Paper");
-      } else if (player === "paper" && computerSelection === "Paper") {
-        tie("Paper");
-      } else if (player === "scissors" && computerSelection === "Paper") {
-        win("Scissors", "Paper");
-      } else if (player === "rock" && computerSelection === "Rock") {
-        tie("Rock");
-      } else if (player === "paper" && computerSelection === "Rock") {
-        win("Paper", "Rock");
-      } else if (player === "scissors" && computerSelection === "Rock") {
-        lose("Scissors", "Rock");
-      } else if (player === "rock" && computerSelection === "Scissors") {
-        win("Rock", "Scissors");
-      } else if (player === "paper" && computerSelection === "Scissors") {
-        lose("Paper", "Scissors");
-      } else if (player === "scissors" && computerSelection === "Scissors") {
-        tie("Scissors");
-      } else {
-        invalid();
-      }
-
-      function win(player, comp) {
-        alert("You win, " + player + " beats " + comp + "!");
-        playerScore++;
-        console.log("Your total score is " + playerScore);
-      }
-
-      function lose(player, comp) {
-        alert("Computer wins, " + comp + " beats " + player + "!");
-        computerScore++;
-        console.log("Computer's total score is " + computerScore);
-      }
-
-      function tie(player) {
-        alert("It's a tie, you both picked " + player);
-      }
-
-      function invalid() {
-        alert("Sorry, you must input Rock, Paper, or Scissors");
-      }
-    }
-    playRound(playerSelection, computerSelection);
-  }
   playGame(i);
 }
 
-function gameWinner() {
-  if (playerScore > computerScore) {
-    alert("You are the champion!!");
-  } else if (playerScore == computerScore) {
-    alert("It's a draw, you're both winners... or, losers?");
-  } else {
-    alert("Computer is the champion and will takeover the world!");
-  }
-}
-
-gameWinner();
+gameResult();
